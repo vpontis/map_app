@@ -9,24 +9,35 @@
 		</style>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAub1CZ3WYwgCWk9W_Ze-6i8pp-CyzGRJQ&sensor=true">
 		</script>
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
 			function initialize() {
 
 
 				var mapOptions = {
-					center: new google.maps.LatLng(google.loader.ClientLocation.latitude,google.loader.ClientLocation.longitude),
 					zoom: 15,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 
 				var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-				var marker = new google.maps.Marker({
-					position: map.getCenter(), 
-					map: map,
-					title: 'Your first event'
-				});
+				if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+						var curLo = new google.maps.Marker({
+							position: pos, 
+							map: map,
+							title: 'Your location'
+						});
+
+						map.setCenter(pos);
+
+					}, function() {
+						map.setCenter(new google.maps.LatLng(0,0));
+					});
+				
+
+				}
 
 				function createMarker(latLng){
 					var marker = new google.maps.Marker({
@@ -39,14 +50,10 @@
 					});
 				}
 
-				google.maps.event.addListener(marker, 'click', function(){
-					marker.setVisible(false);
-				});
-
 				google.maps.event.addListener(map, 'click', function(event){
 						createMarker(event.latLng);							
-					});		
-				}
+				});		
+			}
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 	</head>
