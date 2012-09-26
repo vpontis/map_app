@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-MapApp::Application.config.secret_token = '1ded5f4f8cae7d745e15144c5be28f6c8e89cc9c5fbed1d97e4d25e69cef599ba8a0fd3681d469d5012be62d4ed60838900794738aab64618ef1983568ec1ebe'
+MapApp::Application.config.secret_token = '3f2b38d986b4941e23b0cdd3f0545b528ad2b5aaf5725c2fa54e2af636dc743c85baa992d3ecaf31aabd97d27c1df10814ea6a75a4bf9e5d6a6a3cc07890b5ed'
