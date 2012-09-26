@@ -9,35 +9,18 @@
 		</style>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAub1CZ3WYwgCWk9W_Ze-6i8pp-CyzGRJQ&sensor=true">
 		</script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
 			function initialize() {
 
-				var geolocator;
-
-				function displayPosition(position){
-					map.setCenter(new google.maps.LatLng(position.coords.latitude, 
-                                     position.coords.longitude));
-				}
-
-				function displayError(positionError){
-					alert("error");
-				}
 
 				var mapOptions = {
-					center: new google.maps.LatLng(-42.358607,71.093057),
+					center: new google.maps.LatLng(google.loader.ClientLocation.latitude,google.loader.ClientLocation.longitude),
 					zoom: 15,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 
 				var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-				try {
-					geolocator = navigator.geolocation;
-				} catch(e) {}
-
-				if(geolocator) {
-					geolocator.getCurrentPosition(displayPosition, displayError);
-				}
 
 				var marker = new google.maps.Marker({
 					position: map.getCenter(), 
